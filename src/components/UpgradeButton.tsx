@@ -1,3 +1,4 @@
+"use client";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { trpc } from "@/app/_trpc/client";

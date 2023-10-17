@@ -1,3 +1,4 @@
+"use client";
 import { trpc } from "@/app/_trpc/client";
 import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 import { Loader, MessageSquareDashed } from "lucide-react";

@@ -13,7 +13,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight, Check, HelpCircle, Minus } from "lucide-react";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const { getUser } = getKindeServerSession();
   const user = getUser();
   const pricingItems = [
@@ -200,4 +200,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
