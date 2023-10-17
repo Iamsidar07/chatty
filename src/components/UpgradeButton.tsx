@@ -8,9 +8,6 @@ const UpgradeButton = () => {
     onSuccess: ({ url }) => {
       window.location.href = url ?? "/dashboard/billing";
     },
-    onError(error) {
-      console.log(error);
-    },
   });
   return (
     <Button className="w-full" onClick={() => createSession()}>
