@@ -1,3 +1,26 @@
+# Chatty - Chat with pdfs
+[Chatty - Chat with pdf](https://chatty-five-mocha.vercel.app/) is a software to chat with the pdf using ai
+![thumbnail](/public/thumbnail.png)
+## Gmatrix (Performance statstics)
+Chatty is fully responsive and **100% performance** full web app you can visit at [Gmatrix result](https://gtmetrix.com/reports/chatty-five-mocha.vercel.app/ACR5Nv98/)
+## Tech stacks
+- Prisma
+- PlanetScale (database)
+- Pinecone (vector database)
+- Typescript
+- trpc
+- Shadcn-ui
+- Kinde (authentication)
+## Features
+- Chat with pdf
+- saas
+- subscription
+
+### Usage
+- Sign up
+- Upload pdf
+- Start Chat with your pdf
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
