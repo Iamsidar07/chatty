@@ -1,11 +1,13 @@
 import Dashboard from "@/components/Dashboard";
 import { db } from "@/db";
+import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 const page = async () => {
   const { getUser } = getKindeServerSession();
   const user = getUser();
+  const subscriptionPlan = await getUserSubscriptionPlan();
   if (!user || !user.id) redirect("/auth-callback?origin=dashboard");
   const dbUser = await db.user.findFirst({
     where: {
@@ -13,6 +15,6 @@ const page = async () => {
     },
   });
   if (!dbUser) redirect("/auth-callback?origin=dashboard");
-  return <Dashboard />;
+  return <Dashboard subscriptionPlan={subscriptionPlan} />;
 };
 export default page;
