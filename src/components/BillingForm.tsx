@@ -53,18 +53,15 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
               {subscriptionPlan.isSubscribed
                 ? "Manage Subscription"
                 : "Upgrade to PRO"}
-              {subscriptionPlan.isSubscribed ? (
-                <p className="rounded-full text-sm font-medium">
-                  {subscriptionPlan.isCanceled
-                    ? "Your plan will be cancel on"
-                    : "Your plan review on"}
-                  {format(
-                    subscriptionPlan.stripeCurrentPeriodEnd!,
-                    "dd.MM.yyyy",
-                  )}
-                </p>
-              ) : null}
             </Button>
+            {subscriptionPlan.isSubscribed ? (
+              <p className="rounded-full text-sm font-medium">
+                {subscriptionPlan.isCanceled
+                  ? "Your plan will be cancel on "
+                  : "Your plan review on "}
+                {format(subscriptionPlan.stripeCurrentPeriodEnd!, "dd.MM.yyyy")}
+              </p>
+            ) : null}
           </CardHeader>
         </Card>
       </form>

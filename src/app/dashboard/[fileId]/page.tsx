@@ -1,6 +1,7 @@
 import ChatWrapper from "@/components/ChatWrapper";
 import PDFRenderer from "@/components/PDFRenderer";
 import { db } from "@/db";
+import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound, redirect } from "next/navigation";
 
@@ -9,7 +10,7 @@ interface PageProps {
     fileId: string;
   };
 }
-const page = async ({ params }: PageProps) => {
+const Page = async ({ params }: PageProps) => {
   const { fileId } = params;
   const { getUser } = getKindeServerSession();
   const user = getUser();
@@ -23,6 +24,7 @@ const page = async ({ params }: PageProps) => {
     },
   });
   if (!file) notFound();
+  const subscriptionPlan = await getUserSubscriptionPlan();
   return (
     <div className="flex justify-between flex-1 flex-col h-[calc(100vh-56px)]">
       <div className="mx-auto max-w-8xl w-full grow lg:flex xl:px-2">
@@ -33,11 +35,11 @@ const page = async ({ params }: PageProps) => {
         </div>
 
         <div className="shrink-0 flex-[0.75] border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-          <ChatWrapper fileId={file.id} />
+          <ChatWrapper fileId={file.id} subscriptionPlan={subscriptionPlan} />
         </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;

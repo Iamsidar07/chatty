@@ -5,8 +5,12 @@ import Messages from "./Chat/Messages";
 import { ChevronLeft, Loader, XCircle } from "lucide-react";
 import Link from "next/link";
 import { ChatContextProvider } from "./Chat/chatContext";
-
-const ChatWrapper = ({ fileId }: { fileId: string }) => {
+import { getUserSubscriptionPlan } from "@/lib/stripe";
+interface ChatWrapperProps {
+  fileId: string;
+  subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>;
+}
+const ChatWrapper = ({ fileId, subscriptionPlan }: ChatWrapperProps) => {
   const { data, isLoading } = trpc.getFileUploadStatus.useQuery(
     { fileId },
     {
@@ -44,7 +48,7 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
         <ChatInput isDisabled />
       </div>
     );
-  
+
   if (data?.status === "FAILED")
     return (
       <div className="relative min-h-screen bg-zinc-50 flex flex-col divide-y divide-zinc-200 gap-2">
@@ -56,8 +60,11 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
             </h3>
             <p className="text-zinc-400 text-sm">Too many pages in your pdf</p>
             <p className="text-zinc-500 text-sm">
-              Your <span className="font-semibold font-mono">free</span> plan
-              ony support 5 pages per pdf.
+              Your{" "}
+              <span className="font-semibold font-mono">
+                {subscriptionPlan.name}
+              </span>{" "}
+              plan ony support {subscriptionPlan.pagesPerPdf} pages per pdf.
             </p>
             <Link
               href={"/dashboard"}
